@@ -1,0 +1,12 @@
+:root {
+    --main-color-one: #8a0d8c;
+    --main-color-two: #A1ED38;
+    --secondary-color-one:#DB62C9;
+    --secondary-color-two: #F49E3F;
+    --font: "Comic Sans MS", sans-serif;
+    --padding-b: 40px;
+    --padding-s: 15px;
+    --border-w: 2px;
+    --border-r-l: 20px;
+    --border-r-s: 10px;
+}
