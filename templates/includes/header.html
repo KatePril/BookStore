@@ -1,11 +1,11 @@
 {% load static %}
 <nav>
     <div class="inside-nav">
-        <a href="">
+        <a href="{% url 'about_us' %}">
             <img class="img-logo" src="{% static 'img/logo1.svg' %}" alt="" style="width: 200px;">
         </a>
         <div class="for-nav-links">
-            <a href="" class="nav-links">About us</a>
+            <a href="{% url 'about_us' %}" class="nav-links">About us</a>
             <a href="" class="nav-links">Catalog</a>
             <a href="" class="nav-links">Blog</a>
         </div>
