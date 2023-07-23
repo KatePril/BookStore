@@ -1,42 +1,4 @@
-:root {
 
-    --main-color-one: #8a0d8c;
-    --main-color-two: #A1ED38;
-    --secondary-color-one:#DB62C9;
-    --secondary-color-two: #F49E3F;
-
-    /* --main-color-one: #281068;
-    --main-color-two: #8771EC;
-    --secondary-color-one:#9A48BB;
-    --secondary-color-two: #D0CFFF;
-
-    --main-color-one: #E58206;
-    --main-color-two: #C52433;
-    --secondary-color-one:#EEDCC6;
-    --secondary-color-two: #FBB738;
-
-    --main-color-one: #F2CD5C;
-    --main-color-two: #F2921D;
-    --secondary-color-one:#A61F69;
-    --secondary-color-two: #400E32;
-
-    --main-color-one: #6527BE;
-    --main-color-two: #9681EB;
-    --secondary-color-one:#45CFDD;
-    --secondary-color-two: #A7EDE7;
-
-    --main-color-one: #1A5D1A;
-    --main-color-two: #F1C93B;
-    --secondary-color-one:#FBD85D;
-    --secondary-color-two: #FAE392; */
-
-    --font: "Comic Sans MS", sans-serif;
-    --padding-b: 50px;
-    --padding-s: 20px;
-    --border-w: 2px;
-    --border-r-l: 20px;
-    --border-r-s: 10px;
-}
 * {
     padding: none;
     margin: none;
@@ -53,20 +15,21 @@ body {
 nav {
     background-color: var(--main-color-one);
     width: 100%;
-    padding:var(--padding-s);
+    padding:var(--padding-m);
     display: flex;
     justify-content: space-between;
 }
 header {
     position: sticky;
     top: 0px;
+    z-index: 5;
 }
 .inside-nav {
     display: flex;
     align-items: center;
 }
 .nav-links {
-    padding-left: var(--padding-s);
+    padding-left: var(--padding-m);
     font-size: 20px;
     text-decoration: none;
     color: var(--main-color-two);
@@ -83,7 +46,7 @@ header {
 
 .input-color {
     border-radius: var(--border-r-s) 0px 0px var(--border-r-s);
-    border: 2px solid var(--secondary-color-two);
+    border: var(--border-w) solid var(--secondary-color-two);
     height: 50px;
     width: 400px;
     color: var(--secondary-color-two);
@@ -93,7 +56,7 @@ header {
 .search-button {
     background-color: var(--main-color-one);
     border-radius: 0px var(--border-r-s) var(--border-r-s) 0px;
-    border: 2px solid var(--main-color-two);
+    border: var(--border-w) solid var(--main-color-two);
     width: 50px;
 }
 .search-button:hover {
@@ -114,7 +77,7 @@ footer {
     align-items: center;
     justify-content: center;
     background-color: var(--main-color-one);
-    padding:var(--padding-s);
+    padding:var(--padding-m);
     color: var(--main-color-two);
 }
 

@@ -31,7 +31,11 @@
                 Visit our blog
             </button>
         </a>
-    </div>
-    
+    </div> 
+</div>
+<div class="for-cards">
+    {% for book in books %}
+        {% include 'includes/book_card.html'%}
+    {% endfor %}
 </div>
 {% endblock %}

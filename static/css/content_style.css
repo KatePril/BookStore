@@ -1,49 +1,7 @@
-:root {
-
-    --main-color-one: #8a0d8c;
-    --main-color-two: #A1ED38;
-    --secondary-color-one:#DB62C9;
-    --secondary-color-two: #F49E3F;
-
-    /* --main-color-one: #281068;
-    --main-color-two: #8771EC;
-    --secondary-color-one:#9A48BB;
-    --secondary-color-two: #D0CFFF;
-    
-    --main-color-one: #C52433;
-    --main-color-two: #E58206;
-    --secondary-color-one:#EEDCC6;
-    --secondary-color-two: #FBB738;
-
-    --main-color-one: #F2CD5C;
-    --main-color-two: #F2921D;
-    --secondary-color-one:#A61F69;
-    --secondary-color-two: #400E32;
-
-    --main-color-one: #6527BE;
-    --main-color-two: #9681EB;
-    --secondary-color-one:#45CFDD;
-    --secondary-color-two: #A7EDE7;
-
-    --main-color-one: #1A5D1A;
-    --main-color-two: #F1C93B;
-    --secondary-color-one:#FBD85D;
-    --secondary-color-two: #FAE392; */
-
-
-    --font: "Comic Sans MS", sans-serif;
-    --padding-b: 50px;
-    --padding-m: 20px;
-    --padding-s: 10px;
-    --border-w: 2px;
-    --border-r-l: 20px;
-    --border-r-s: 10px;
-}
-
 .block-content {
     background-color: var(--secondary-color-two);
     color: var(--main-color-one);
-    border: 2px solid var(--main-color-two);
+    border: var(--border-w) solid var(--main-color-two);
     border-radius: var(--border-r-l);
 }
 
@@ -73,7 +31,7 @@
 
 .button-outline {
     padding: var(--padding-s);
-    border: 2px solid var(--main-color-one);
+    border: var(--border-w) solid var(--main-color-one);
     border-radius: var(--border-r-s);
     background-color: var(--secondary-color-two);
     color: var(--main-color-one);
