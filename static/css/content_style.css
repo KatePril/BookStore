@@ -3,6 +3,7 @@
     color: var(--main-color-one);
     border: var(--border-w) solid var(--main-color-two);
     border-radius: var(--border-r-l);
+    overflow: hidden;
 }
 
 .div-main-image {

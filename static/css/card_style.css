@@ -3,13 +3,27 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    /* justify-content: space-around; */
+}
+
+.card-3 {
+    width: 30%;
+    margin: var(--padding-l);
+}
+
+.card-2 {
+    width: 45%;
+    margin: var(--padding-l);
 }
 
 .card {
-    width: 30%;
+    width: 100%;
+    height: 100%;
     display: flex;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .best-saled {

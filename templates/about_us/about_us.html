@@ -35,7 +35,9 @@
 </div>
 <div class="for-cards">
     {% for book in books %}
-        {% include 'includes/book_card.html'%}
+        <div class="card-3">
+            {% include 'includes/book_card.html'%}
+        </div>        
     {% endfor %}
 </div>
 {% endblock %}

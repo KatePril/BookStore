@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block breadcrumbs %}{% endblock %}
+{% block content %}
+    <div class="block-content block-info">
+        <div class="for-main-image-detail">
+            {% if book.main_image.image.url %}
+                <img class="card-image" src="{{book.main_image.image.url}}">
+            {% else %}
+                <img src="{% static 'img/tmb.png' %}" alt="{{ book.name }}" class="img-thumbnail">
+            {% endif %}
+        </div>
+        <div class="for-info-detail">
+            {% if book.is_best_saled %}
+                <div class="best-saled"><p class="lead" style="margin: 0;">Best saled</p></div>
+            {% endif %}
+            <h2 class="card-h">{{book.name}}</h2>
+            {%if book.quantity < 3 %}
+                <div class="almost-sold lead">Almost sold out!</div>
+            {% endif %}
+            <div class="for-info">
+                <div class="info-item lead">Quantity: {{book.quantity}}</div>
+                <div class="info-item lead">Price: {{book.price}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="block-content lead block-description">{{book.description|safe}}</div>
+    <div class="for-images-detail">
+        {% for image in book.images.all %}
+            {% if image.image.url != book.main_image.image.url %}
+                <div class="for-image-detail">
+                    <img class="image-detail" src="{{image.image.url}}" alt="">            
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}
