@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block breadcrumbs %}{% endblock %}
+{% block breadcrumbs %}
+    {% include 'includes/breadcrumbs.html' %}
+{% endblock %}
 {% block content %}
     {% if object_list %}
         <div class ='row'>

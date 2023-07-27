@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block breadcrumbs %}{% endblock %}
+{% block breadcrumbs %}
+    {% include 'includes/breadcrumbs.html' %}
+{% endblock %}
 {% block content %}
 <div class="for-list-nav">
     <div class="for-nav-container">
