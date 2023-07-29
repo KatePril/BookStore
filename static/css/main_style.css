@@ -52,15 +52,21 @@ header {
     color: var(--secondary-color-two);
 }
 
-
 .search-button {
-    background-color: var(--main-color-one);
     border-radius: 0px var(--border-r-s) var(--border-r-s) 0px;
-    border: var(--border-w) solid var(--main-color-two);
     width: 50px;
 }
-.search-button:hover {
+
+.green-outline-button {
+    background-color: var(--main-color-one);
+    border: var(--border-w) solid var(--main-color-two);
+    color: var(--main-color-two);
+    font-size: 18px;
+    text-decoration: none;
+}
+.green-outline-button:hover {
     background-color: var(--main-color-two);
+    color: var(--main-color-one);
     .seach-icon {
         color: var(--main-color-one);
     }
@@ -84,4 +90,28 @@ footer {
 .content-div {
     width: 100%;
     padding: var(--padding-b);
+}
+
+.account-buttons {
+    margin-left: var(--padding-m);
+    display: flex;
+    justify-content: end;
+}
+
+.account-button {
+    /* height: 50px; */
+    padding: var(--padding-s) var(--padding-m) var(--padding-s) var(--padding-m);
+}
+
+.account-button-green {
+    border-radius: var(--border-r-s) 0px 0px var(--border-r-s);
+}
+
+.account-button-orange {
+    border-radius: 0px var(--border-r-s) var(--border-r-s) 0px;
+    background-color: var(--secondary-color-two);
+    color: var(--main-color-one);
+    font-size: 18px;
+    text-decoration: none;
+    border: var(--border-w) solid var(--secondary-color-two);
 }

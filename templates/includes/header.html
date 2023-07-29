@@ -10,12 +10,24 @@
             <a href="" class="nav-links">Blog</a>
         </div>
     </div>
-    <div >
-        <form class="search-form" role="search">
-            <input class="search-input input-color" type="search" placeholder="Search" aria-label="Search">
-            <button class="search-button" type="submit">
-                <i class="fa-solid fa-magnifying-glass seach-icon"></i>
-            </button>
-        </form>
+    
+    <div class="inside-nav">
+        <div>
+            <form class="search-form" role="search">
+                <input class="search-input input-color" type="search" placeholder="Search" aria-label="Search">
+                <button class="search-button green-outline-button" type="submit">
+                    <i class="fa-solid fa-magnifying-glass seach-icon"></i>
+                </button>
+            </form>
+        </div>
+        <div class="account-buttons">
+            {% if user.is_authenticated %}
+                <a href="{% url 'profile' %}" class="green-outline-button account-button account-button-green ">Profile</a>
+                <a href="{% url 'logout' %}" class="account-button account-button-orange">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="green-outline-button account-button account-button-green ">Login</a>
+                <a href="{% url 'signup' %}" class="account-button account-button-orange">Sign-up</a>
+            {% endif %}
+        </div>
     </div>
 </nav>

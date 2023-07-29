@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'about_us.apps.AboutUsConfig',
     'main.apps.MainConfig',
     'shop.apps.ShopConfig',
+    'users.apps.UsersConfig'
 ]
 
 MIDDLEWARE = [
@@ -150,6 +151,9 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_CONFIGS = {
     'default': {
@@ -158,3 +162,5 @@ CKEDITOR_CONFIGS = {
         'width': 1200
     },
 }
+
+AUTH_USER_MODEL='users.UserProfile'
