@@ -81,6 +81,7 @@ class Book(MetaTagMixin):
         related_name='books',
         blank=True
     )
+    owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, default=None)
     
     class Meta:
         ordering = ('-created_at',)
