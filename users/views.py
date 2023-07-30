@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
-from .forms import SingupForm, EditProfileForm, CustomAuthenticationForm
+from .forms import SingupForm, EditProfileForm, CustomAuthenticationForm, BookForm
+from shop.models import Book
 
 # Create your views here.
 def login_view(request):
@@ -57,3 +58,30 @@ def profile_edit(request):
 def logout_view(request):
     logout(request)
     return redirect('about_us')
+
+@login_required()
+def create_product(request):
+    if request.method == 'POST':
+        form = BookForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            book = form.save(commit=False)
+            book.owner = request.user
+            book.save()
+            return redirect('book', slug=book.slug)
+    else:
+        form = BookForm()
+    return render(request, 'users/create.html', {'form': form})
+
+@login_required()
+def edit_product(request, slug):
+    book = get_object_or_404(Book, slug=slug, owner=request.user)
+    if request.method == 'POST':
+        form = BookForm(request.POST, request.FILES, instance=book)
+        
+        if form.is_valid():
+            book = form.save()
+            return redirect('book', slug=book.slug)
+    else:
+        form = BookForm(instance=book)
+    return render(request, 'users/edit.html', {'form': form})

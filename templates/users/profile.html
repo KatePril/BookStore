@@ -104,6 +104,14 @@
                     <a class="button-outline-card edit-profile-btn" href="{% url 'profile_edit' %}">Edit</a>
                 </div>
             </div>
+            <div class="block-content products-admin-block">
+                <a href="{% url 'user_books' request.user.id %}" class="green-outline-button-profile view-products-btn">View my products</a>
+                <a href="{% url 'create_product' %}" class="orange-button create-product-btn">Create new product</a>
+            </div>
+            <div class="block-content products-admin-block">
+                <a href="" class="green-outline-button-profile view-products-btn">View my articless</a>
+                <a href="" class="orange-button create-product-btn">Create new article</a>
+            </div>
         </div>
     </div>
 {% endblock %}
