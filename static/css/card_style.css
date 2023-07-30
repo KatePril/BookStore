@@ -1,5 +1,5 @@
 .for-cards {
-    margin-top: var(--padding-b);
+    margin-top: var(--padding-l);
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -54,7 +54,7 @@
     width: 100%;
     padding-top: var(--padding-s);
     padding-bottom: var(--padding-s);
-    background-color: var(--secondary-color-one);
+    background-color: var(--main-color-one);
     color: var(--main-color-two);
     text-align: center;
 }

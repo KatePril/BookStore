@@ -8,7 +8,7 @@
             {% if book.main_image.image.url %}
                 <img class="card-image" src="{{book.main_image.image.url}}">
             {% else %}
-                <img src="{% static 'img/tmb.png' %}" alt="{{ book.name }}" class="img-thumbnail">
+                <img src="{% static 'img/tmb.png' %}" alt="{{ book.name }}" style="width:100%;">
             {% endif %}
         </div>
     </div>

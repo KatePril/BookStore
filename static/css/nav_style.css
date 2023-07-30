@@ -2,7 +2,7 @@
     width: 100%;
     background-color: var(--secondary-color-two);
     padding: var(--padding-m);
-    color: var(--secondary-color-one);
+    color: var(--main-color-one);
     position: sticky;
     top: 90px;
     z-index: 5;

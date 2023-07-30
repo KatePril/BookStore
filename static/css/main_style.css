@@ -7,13 +7,13 @@ body {
     font-family: var(--font);
     padding: 0;
     margin: 0;
-    background-color: var(--secondary-color-one);
+    background-color: var(--main-color-one);
 }
 .img-logo {
     width: 200px;
 }
 nav {
-    background-color: var(--main-color-one);
+    background-color: var(--main-color-two);
     width: 100%;
     padding:var(--padding-m);
     display: flex;
@@ -32,24 +32,25 @@ header {
     padding-left: var(--padding-m);
     font-size: 20px;
     text-decoration: none;
-    color: var(--main-color-two);
+    color: var(--main-color-one);
 }
 .search-form {
     display: flex;
 }
+
 .search-input {
     margin-right: 0px;
-    background-color: var(--main-color-one);
+    background-color: var(--main-color-two);
     color: var(--main-color-one);
     font-size: 20px;
 }
 
 .input-color {
     border-radius: var(--border-r-s) 0px 0px var(--border-r-s);
-    border: var(--border-w) solid var(--secondary-color-two);
+    border: var(--border-w) solid var(--main-color-one);
     height: 50px;
     width: 400px;
-    color: var(--secondary-color-two);
+    color: var(--main-color-one);
 }
 
 .search-button {
@@ -58,22 +59,22 @@ header {
 }
 
 .green-outline-button {
-    background-color: var(--main-color-one);
-    border: var(--border-w) solid var(--main-color-two);
-    color: var(--main-color-two);
+    background-color: var(--main-color-two);
+    border: var(--border-w) solid var(--main-color-one);
+    color: var(--main-color-one);
     font-size: 18px;
     text-decoration: none;
 }
 .green-outline-button:hover {
-    background-color: var(--main-color-two);
-    color: var(--main-color-one);
+    background-color: var(--main-color-one);
+    color: var(--main-color-two);
     .seach-icon {
-        color: var(--main-color-one);
+        color: var(--main-color-two);
     }
 }
 
 .seach-icon {
-    color: var(--main-color-two);
+    color: var(--main-color-one);
     font-size: 26px;
 }
 
@@ -82,9 +83,9 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--main-color-one);
+    background-color: var(--main-color-two);
     padding:var(--padding-m);
-    color: var(--main-color-two);
+    color: var(--main-color-one);
 }
 
 .content-div {
