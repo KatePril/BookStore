@@ -1,0 +1,28 @@
+{% extends "core/base.html" %}
+
+{% block breadcrumbs %}
+    {% include 'includes/breadcrumbs.html' %}
+{% endblock %}
+
+
+{% block content_shop %}
+
+<div class="row my-2 gap-3">
+    {% comment %} {% include 'catalog/blocks/_list_category.html' %} {% endcomment %}
+
+    <div class="col bg-body-tertiary rounded-3 p-4">
+
+        <h3 class = "mb-4">Дякуємо за замовлення!</h3>
+        <p>Ваше замовлення успішно оформлено.</p>
+        <p>Наш менеджер зв'яжеться з вами найближчим часом.</p>
+        <p>Ваше замовлення <h3><b>№{{ order.id }}</b>.</h3></p>
+        <p>На вашу електронну пошту відправлено лист з інформацією про замовлення.</p>
+        {% comment %} <p>Ви можете переглянути своє замовлення в <a href="{% url 'orders:orders_list' %}">Особистому кабінеті</a>.</p> {% endcomment %}
+
+       
+        
+    </div>
+
+</div>
+
+{% endblock %}

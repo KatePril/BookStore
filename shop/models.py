@@ -1,4 +1,7 @@
+import uuid
+
 from django.db import models
+from django.utils.text import slugify
 
 from django.contrib.admin import display
 from django.utils.safestring import mark_safe
@@ -70,7 +73,7 @@ class Book(MetaTagMixin):
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True)
     description = RichTextField(blank=True, null=True)
-    quantity = models.PositiveIntegerField(default=0)
+    quantity = models.PositiveIntegerField(default=0, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -79,7 +82,8 @@ class Book(MetaTagMixin):
         to=Category,
         through = 'BookCategory',
         related_name='books',
-        blank=True
+        blank=True,
+        null=True
     )
     owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, default=None)
     
@@ -109,6 +113,10 @@ class Book(MetaTagMixin):
         if category:
             return category
         return self.category.first()
+     
+    def save(self, *args, **kwargs):
+        self.slug = slugify(f'{self.name}_{uuid.uuid4()}')
+        super().save(*args, **kwargs)
 
 class BookCategory(models.Model):
     book = models.ForeignKey(Book, verbose_name='Товар', on_delete=models.CASCADE)

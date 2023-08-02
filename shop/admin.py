@@ -27,6 +27,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('name',)}
     fields = ('name', 'slug', 'description', 'quantity', 'price', 'is_best_saled', 'meta_title', 'meta_description', 'meta_keywords', 'owner')
     list_display = ('id', 'name', 'quantity', 'price', 'is_best_saled')
     list_display_links = ('id', 'name')

@@ -5,7 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm
 
 from ckeditor.fields import RichTextFormField
 
-from shop.models import Book
+from shop.models import Book, Image
 
 class SingupForm(UserCreationForm):
     class Meta:
@@ -62,18 +62,24 @@ class CustomAuthenticationForm(AuthenticationForm):
 
 
 class BookForm(forms.ModelForm):
+    image = forms.ImageField(required=False)
     class Meta:
         model = Book
         fields = ('name', 'description', 'quantity', 'price', 'is_best_saled', 'category')
         widgets = {
-            'category': forms.Select(attrs={'class': 'form-control'}),
+            'category': forms.SelectMultiple(attrs={'class': 'form-control'}),
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'quantity': forms.NumberInput(attrs={'class': 'form-control'}),
             'price': forms.NumberInput(attrs={'class': 'form-control'}),
         }
 
-    def save(self, commit=True):
+    def save(self,  user):
+        
         book = super().save(commit=False)
-        if commit:
-            book.save()  
+        book.owner = user
+        book.save()
+            
+        print(book.id)
+        if self.cleaned_data['image']:
+            Image.objects.create(book=book, image=self.cleaned_data['image'], is_main=True)
         return book

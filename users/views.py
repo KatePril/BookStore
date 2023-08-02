@@ -3,6 +3,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
+from django.utils.text import slugify
+
 from .forms import SingupForm, EditProfileForm, CustomAuthenticationForm, BookForm
 from shop.models import Book
 
@@ -61,27 +63,34 @@ def logout_view(request):
 
 @login_required()
 def create_product(request):
+    print(request.method)
     if request.method == 'POST':
         form = BookForm(request.POST, request.FILES)
-
+        print(form.is_valid())
         if form.is_valid():
-            book = form.save(commit=False)
-            book.owner = request.user
-            book.save()
+            book = form.save(user=request.user)
+            print('____________________________OK____________________________________')
             return redirect('book', slug=book.slug)
     else:
+        ('____________________________NOT____________________________________')
         form = BookForm()
+    print('____________________________:(____________________________________')
     return render(request, 'users/create.html', {'form': form})
 
 @login_required()
 def edit_product(request, slug):
+    print(request.method)
     book = get_object_or_404(Book, slug=slug, owner=request.user)
+    print(book)
     if request.method == 'POST':
         form = BookForm(request.POST, request.FILES, instance=book)
-        
+        print(form)
         if form.is_valid():
-            book = form.save()
+            book = form.save(user=request.user)
+            print('____________________________OK____________________________________')
             return redirect('book', slug=book.slug)
     else:
+        print('____________________________NOT____________________________________')
         form = BookForm(instance=book)
+    print('____________________________:(____________________________________')
     return render(request, 'users/edit.html', {'form': form})

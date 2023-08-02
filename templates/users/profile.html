@@ -1,5 +1,5 @@
 {% extends 'base.html'%}
-
+{% load static %}
 {% block title %} {{title}} {% endblock %}
 
 {% block content %}
@@ -7,13 +7,13 @@
         <div class="profile-main-info">
             <div class="block-content profile-main-info-padding">
                 <div class="d-flex flex-column align-items-center text-center">
-                    {% if user.image %}
-                        <div class="for-photo">
+                    <div class="for-photo">
+                        {% if user.image %}
                             <img src="{{user.image.url}}" alt="Admin" class="profile-photo" width="150" >
-                        </div>
-                    {% else %}
-                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
-                    {% endif %}
+                        {% else %}
+                            <img src="{% static 'img/avatar.png' %}"  style="width:100%;">
+                        {% endif %}
+                    </div>
                 </div>
                 <div class="profile-main-text">
                     <h3>{{user.username}}</h3>
@@ -29,7 +29,13 @@
                                 </div>
                                 <h5 class="social-media-title">Github</h5>
                             </div>
-                            <span class="">https://www.github.com/{{request.user.github}}</span>
+                            <span class="">https://www.github.com/
+                                {% if request.user.github %}
+                                    {{request.user.github}}
+                                {% else %}
+                                    example
+                                {% endif %}
+                            </span>
                         </li>
                         <li class="social-media-item">
                             <div class="for-social-media">
@@ -38,7 +44,13 @@
                                 </div>
                                 <h5 class="social-media-title">Twitter</h5>
                             </div>
-                            <span class="">@{{request.user.twitter}}</span>
+                            <span class="">@
+                                {% if request.user.twitter %}
+                                {{request.user.twitter}}
+                                {% else %}
+                                    example
+                                {% endif %}
+                        </span>
                         </li>
                         <li class="social-media-item">
                             <div class="for-social-media">
@@ -47,7 +59,13 @@
                                 </div>
                                 <h5 class="social-media-title">Instagram</h5>
                             </div>
-                            <span class="">https://www.instagram.com/{{request.user.instagram}}</span>
+                            <span class="">https://www.instagram.com/
+                                {% if request.user.instagram %}
+                                    {{request.user.instagram}}
+                                {% else %}
+                                    example
+                                {% endif %}
+                            </span>
                         </li>
                         <li class="social-media-item">
                             <div class="for-social-media">
@@ -56,7 +74,13 @@
                                 </div>
                                 <h5 class="social-media-title">Facebook</h5>
                             </div>
-                            <span class="">https://www.facebook.com/{{request.user.facebook}}</span>
+                            <span class="">https://www.facebook.com/
+                                {% if request.user.facebook%}
+                                    {{request.user.facebook}}
+                                {% else %}
+                                    example
+                                {% endif %}
+                            </span>
                         </li>
                     </ul>
                 </div>
@@ -69,7 +93,9 @@
                         <h5 class="mb-0">Full Name</h5>
                     </div>
                     <div class="">
-                    {{ request.user.get_full_name }}
+                        {% if request.user.get_full_name %}
+                            {{request.user.get_full_name}}
+                        {% endif %}
                     </div>
                 </div>
                 <hr class="hr-profile">
@@ -78,7 +104,9 @@
                         <h5 class="mb-0">Email</h5>
                     </div>
                     <div class="">
-                        {{ request.user.email }}
+                        {% if request.user.email %}
+                            {{request.user.email}}
+                        {% endif %}
                     </div>
                 </div>
                 <hr class="hr-profile">
@@ -87,7 +115,9 @@
                         <h5 class="mb-0">Phone number</h5>
                     </div>
                     <div class="">
-                        {{ request.user.phone}}
+                        {% if request.user.phone %}
+                            {{request.user.phone}}
+                        {% endif %}
                     </div>
                 </div>
                 <hr class="hr-profile">
@@ -96,7 +126,9 @@
                         <h5 class="mb-0">Address</h5>
                     </div>
                     <div class="">
-                        {{ request.user.address}}
+                        {% if request.user.address %}
+                            {{request.user.address}}
+                        {% endif %}
                     </div>
                 </div>
                 <hr class="hr-profile">
