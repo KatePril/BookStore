@@ -169,3 +169,12 @@ class Image(models.Model):
             if not self.image_thumbnail:
                 Image.objects.get(id=self.id)
             return mark_safe(f'<img src="{self.image_thumbnail.url}">')
+        
+    def set_main(self):
+        images = Image.objects.filter(book=self.book)
+        print(images)
+        for image in images:
+            image.is_main = False
+            image.save()
+        self.is_main = True
+        self.save()

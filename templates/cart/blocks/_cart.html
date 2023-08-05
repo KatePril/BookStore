@@ -14,7 +14,7 @@
     {% for row in cart.cart %}
         <tr>
             <td><a href="{% url 'book' slug=row.book.slug %}"><img class="img-thumbnail" width="70"
-                                                                     src="{{ row.book.main_image.image_thumbnail.url }}"
+                                                                     src="{{ row.book.main_image.image.url }}"
                                                                      alt=""></a></td>
             <td><a href="{% url 'book' slug=row.book.slug %}">{{ row.book.name }}</a></td>
             <td>{{ row.quantity }}</td>

@@ -32,7 +32,69 @@
 
 .image-detail {
     width: 100%;
-    border-radius: var(--border-r-l);
-    border: var(--border-w) solid var(--main-color-two);
+    border-radius: var(--border-r-l) var(--border-r-l) 0 0;
+    border-left: var(--border-w) solid var(--main-color-two);
+    border-right: var(--border-w) solid var(--main-color-two);
+    border-top: var(--border-w) solid var(--main-color-two);
     overflow: hidden;
+}
+
+.for-image-buttons {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.button-image {
+    width: 50%;
+    padding: var(--padding-s);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.orange-outline-button {
+    border: var(--border-w) solid var(--main-color-two);
+    color: var(--main-color-two);
+}
+
+.orange-outline-button:hover {
+    background-color: var(--main-color-two);
+    color: var(--main-color-one);
+}
+
+.orange-button-image {
+    border: var(--border-w) solid var(--main-color-two);
+    color: var(--main-color-one);
+    background-color: var(--main-color-two);
+}
+
+.orange-outline-button-image-detail {
+    border-radius: 0 0 0 var(--border-r-l);
+}
+
+.orange-button-image-detail {
+    border-radius: 0 0 var(--border-r-l) 0;
+}
+
+.for-cart-button {
+    margin-left: var(--padding-s);
+    margin-right: var(--padding-s);
+    margin-bottom: var(--padding-s);
+    display: flex;
+}
+
+.add-to-cart-button {
+    width: 200px;
+    padding: var(--padding-s);
+    border-radius: var(--border-r-s);
+    border: var(--border-w) solid var(--main-color-one);
+    background-color: var(--secondary-color-two);
+    color: var(--main-color-one);
+}
+
+.add-to-cart-button:hover {
+    background-color: var(--main-color-one);
+    color: var(--secondary-color-two);
 }

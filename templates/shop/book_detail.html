@@ -25,34 +25,51 @@
                 <div class="info-item lead">Quantity: {{book.quantity}}</div>
                 <div class="info-item lead">Price: {{book.price}}</div>
             </div>
+            {% if request.user.id == book.owner.id %}
+            <div class="for-card-button">
+                <a href="{% url 'edit_product' book.slug %}" style="width:100%;">
+                    <button class="button-outline-card lead">
+                        Edit
+                    </button>
+                </a>
+            </div>
+            {% endif %}
+            {% if book.quantity %}
+                {% if request.user.id != book.owner.id%}
+                    {% if user.is_authenticated %}
+                        <form action="{% url 'add_to_cart' %}" method="get">
+                            <input type="hidden" name="book" value="{{ book.id }}">
+                            <div class="for-cart-button">
+                                <input type="number" min="1" step="1" max="{{ book.quantity }}" value="1" class="form-control" name="quantity">
+                                <button class="add-to-cart-button lead" type="submit" id="button-addon1"><i class="fas fa-shopping-cart"></i> Add to cart</button>
+                            </div>
+                        </form>
+                    {% else %}
+                        <div class="alert alert-info">Робити покупки можуть тільки зареєстровані користувачі</div>
+                    {% endif %}
+                {% endif %}
+            {% else %}
+                <div class="alert alert-warning">Товар закінчився</div>
+            {% endif %}
+
         </div>
     </div>
+    {% if book.description %}
     <div class="block-content lead block-description">{{book.description|safe}}</div>
+    {% endif %}
     <div class="for-images-detail">
         {% for image in book.images.all %}
             {% if image.image.url != book.main_image.image.url %}
                 <div class="for-image-detail">
-                    <img class="image-detail" src="{{image.image.url}}" alt="">            
+                    <img class="image-detail" src="{{image.image.url}}" alt="">
+                    {% if request.user.id == book.owner.id %}
+                    <div class="for-image-buttons">
+                        <a href="{% url 'delete_image' slug=book.slug pk=image.id %}" class="button-image orange-outline-button orange-outline-button-image-detail lead">Delete</a>
+                        <a href="{% url 'set_main_image' slug=book.slug pk=image.id %}" class="button-image orange-button-image orange-button-image-detail lead">Main</a>
+                    </div>
+                    {% endif %}     
                 </div>
             {% endif %}
         {% endfor %}
     </div>
-
-    {% comment %} {% if book.quantity %}
-        {% if user.is_authenticated %}
-            <form action="{% url 'add_to_cart' %}" method="get">
-                <input type="hidden" name="book" value="{{ book.id }}">
-                <div class="input-group mb-3">
-                    <input type="number" min="1" step="1" max="{{ book.quantity }}" value="1" class="form-control" name="quantity">
-                    <button class="btn btn-success" type="submit" id="button-addon1"><i class="fas fa-shopping-cart"></i> Добавить в корзину</button>
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="far fa-heart"></i></button>
-                </div>
-            </form>
-        {% else %}
-            <div class="alert alert-info">Робити покупки можуть тільки зареєстровані користувачі</div>
-        {% endif %}
-    {% else %}
-        <div class="alert alert-warning">Товар закінчився</div>
-    {% endif %} {% endcomment %}
-
 {% endblock %}

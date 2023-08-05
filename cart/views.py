@@ -30,18 +30,21 @@ class AddToCartView(LoginRequiredMixin, View):
         
         if form.is_valid():
             cd = form.cleaned_data
-            row = Cart.objects.filter(product=cd['product'], user=cd['user'].first())
+            # print(Cart.objects.filter(book=cd['book'], user=cd['user']))
+            row = Cart.objects.filter(book=cd['book'], user=cd['user']).first()
             if row:
                 row.quantity = cd['quantity']
+                book = Book.objects.filter(id=cd['book'].id).first()
+                Book.objects.filter(id=cd['book'].id).update(quantity=book.quantity-cd['quantity'])
                 row.save()
             else:
                 form.save()
-            return render(request, 'cart/added.html', {'product': cd['product'], 'cart': get_cart_data(cd['user']), 'breadcrumbs': self.get_breadcrumbs()})
+            return render(request, 'cart/added.html', {'product': cd['book'], 'cart': get_cart_data(cd['user']), 'breadcrumbs': self.get_breadcrumbs()})
         
     def get_breadcrumbs(self):
         breadcrumbs = {reverse('catalog'): PAGE_NAMES['catalog']}
         breadcrumbs[reverse('cart')] = 'Cart'
-        breadcrumbs[reverse('current')] = 'Added'
+        # breadcrumbs[reverse('current')] = 'Added'
         return breadcrumbs
     
 class CartView(LoginRequiredMixin, View):

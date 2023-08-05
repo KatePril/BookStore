@@ -21,18 +21,10 @@
         <div class="info-item lead">Price: {{book.price}}</div>
     </div>
     <div class="for-card-button">
-        {% if request.user.id == book.owner.id %}
-        <a href="{% url 'edit_product' book.slug %}" style="width:100%;">
-            <button class="button-outline-card lead">
-                Edit
-            </button>
-        </a>
-        {% else %}
         <a href="{{ book.get_absolute_url }}" style="width:100%;">
             <button class="button-outline-card lead">
                 Details
             </button>
         </a>
-        {% endif %}
     </div>
 </div>

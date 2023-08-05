@@ -1,9 +1,9 @@
 from django.db.models import Q
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from config.settings import PAGE_NAMES
-from .models import Category, Book
+from .models import Category, Book, Image
 from main.mixins import ListViewBreadCrumbMixin, DetailViewBreadcrumbsMixin
 # Create your views here.
 
@@ -99,3 +99,13 @@ def search(request):
     query = request.GET.get('query', '')
     books = Book.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
     return render(request, 'shop/custom_list.html', {'books': books})
+
+def delete_image(request, pk, slug):
+    image = get_object_or_404(Image, pk=pk, book__owner=request.user)
+    image.delete()
+    return redirect('book', slug=slug)
+
+def set_main_image(request, pk, slug):
+    image = get_object_or_404(Image, pk=pk, book__owner=request.user)
+    image.set_main()
+    return redirect('book', slug=slug)
