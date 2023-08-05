@@ -22,6 +22,9 @@
         </div>
         <div class="account-buttons">
             {% if user.is_authenticated %}
+                <a href="{% url 'cart' %}" class="green-outline-button account-button cart-button">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
                 <a href="{% url 'profile' %}" class="green-outline-button account-button account-button-green ">Profile</a>
                 <a href="{% url 'logout' %}" class="account-button account-button-orange">Logout</a>
             {% else %}

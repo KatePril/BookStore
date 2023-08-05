@@ -45,11 +45,11 @@
                             </div>
                         </form>
                     {% else %}
-                        <div class="alert alert-info">Робити покупки можуть тільки зареєстровані користувачі</div>
+                        <div class="almost-sold lead">You need to log in or sign up before adding books to cart</div>
                     {% endif %}
                 {% endif %}
             {% else %}
-                <div class="alert alert-warning">Товар закінчився</div>
+                <div class="almost-sold lead">Product has ended</div>
             {% endif %}
 
         </div>
@@ -61,12 +61,14 @@
         {% for image in book.images.all %}
             {% if image.image.url != book.main_image.image.url %}
                 <div class="for-image-detail">
-                    <img class="image-detail" src="{{image.image.url}}" alt="">
                     {% if request.user.id == book.owner.id %}
+                    <img class="image-detail" src="{{image.image.url}}" alt="">
                     <div class="for-image-buttons">
                         <a href="{% url 'delete_image' slug=book.slug pk=image.id %}" class="button-image orange-outline-button orange-outline-button-image-detail lead">Delete</a>
                         <a href="{% url 'set_main_image' slug=book.slug pk=image.id %}" class="button-image orange-button-image orange-button-image-detail lead">Main</a>
                     </div>
+                    {% else %}
+                    <img class="image-detail-not-owner" src="{{image.image.url}}" alt="">
                     {% endif %}     
                 </div>
             {% endif %}

@@ -39,7 +39,7 @@ class AddToCartView(LoginRequiredMixin, View):
                 row.save()
             else:
                 form.save()
-            return render(request, 'cart/added.html', {'product': cd['book'], 'cart': get_cart_data(cd['user']), 'breadcrumbs': self.get_breadcrumbs()})
+            return render(request, 'cart/added.html', {'book': cd['book'], 'cart': get_cart_data(cd['user']), 'breadcrumbs': self.get_breadcrumbs()})
         
     def get_breadcrumbs(self):
         breadcrumbs = {reverse('catalog'): PAGE_NAMES['catalog']}
@@ -63,6 +63,7 @@ class CartView(LoginRequiredMixin, View):
 
 class OrderCreateView(LoginRequiredMixin, View):
     def get(self, request):
+        print('here GET')
         error = None
         user = request.user
         cart = get_cart_data(user.id)
@@ -80,11 +81,10 @@ class OrderCreateView(LoginRequiredMixin, View):
             'address': user.address if user.address else '',
         })
 
-        return render(request,
-                        'cart/order_create.html',
-                        {'form': form, 'cart': cart, 'error': error, 'breadcrumbs': self.get_breadcrumbs()})
+        return render(request, 'cart/order_create.html', {'form': form, 'cart': cart, 'error': error, 'breadcrumbs': self.get_breadcrumbs()})
             
     def post(self, request):
+        print('here POST')
         user = request.user
         cart = get_cart_data(user.id)
         
@@ -94,7 +94,8 @@ class OrderCreateView(LoginRequiredMixin, View):
         data.update(paid=False)
         request.POST = data
         form = OrderCreateForm(request.POST)
-        print(request.POST)
+        # print(request.POST)
+        print(form.is_valid())
         if form.is_valid():
             order = form.save()
             
@@ -110,14 +111,12 @@ class OrderCreateView(LoginRequiredMixin, View):
                     Book.objects.filter(id=row.book.id).update(quantity=row.book.quantity - quantity)
                 Cart.objects.filter(user=user.id).delete()
             return render(request,
-                            'order/order_created.html',
+                            'cart/order_created.html',
                             {'order': order, 'breadcrumbs': self.get_breadcrumbs()})
         else:
             messages.error(request, 'Error happened', extra_tags='danger')
 
-        return render(request,
-                        'order/order_create.html',
-                        {'form': form, 'cart': cart, 'breadcrumbs': self.get_breadcrumbs()})
+        return render(request, 'cart/order_create.html', {'form': form, 'cart': cart, 'breadcrumbs': self.get_breadcrumbs()})
     
     
     def get_breadcrumbs(self):

@@ -5,7 +5,7 @@
 {% endblock %}
 
 
-{% block content_shop %}
+{% block content %}
 
 <div class="row my-2 gap-3">
     {% comment %} {% include 'catalog/blocks/_list_category.html' %} {% endcomment %}
@@ -14,7 +14,7 @@
 
         <h3 class = "mb-4">Кошик</h3>
 
-        {% include 'order/blocks/_cart.html' %}
+        {% include 'cart/blocks/_cart.html' %}
         
     </div>
     <div class="col bg-body-tertiary rounded-3 p-4">

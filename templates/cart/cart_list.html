@@ -10,15 +10,14 @@
 <div class="row my-2 gap-3">
     {% comment %} {% include 'catalog/blocks/_list_category.html' %} {% endcomment %}
 
-    <div class="col bg-body-tertiary rounded-3 p-4">
+    <div class="block-content table-container">
 
         <h3 class = "mb-4">Кошик</h3>
 
         {% include 'cart/blocks/_cart.html' %}
-        <hr class="my-4">
         <div class="d-flex justify-content-between">
-            <a href="{% url 'catalog' %}" class="btn btn-outline-primary">Продовжити покупки</a>
-            <a href="{% url 'create_order' %}" class="btn btn-primary">Оформити замовлення</a>
+            <a href="{% url 'catalog' %}" class="lead green-outline-button-cart">Continue shopping</a>
+            <a href="{% url 'create_order' %}" class="lead green-button-cart">Make order</a>
         </div>
     </div>
 </div>

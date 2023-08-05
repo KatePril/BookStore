@@ -104,6 +104,12 @@ footer {
     padding: var(--padding-s) var(--padding-m) var(--padding-s) var(--padding-m);
 }
 
+.cart-button {
+    margin-right: var(--padding-m);
+    border-radius: var(--border-r-s);
+    font-size: 20px;
+}
+
 .account-button-green {
     border-radius: var(--border-r-s) 0px 0px var(--border-r-s);
 }
