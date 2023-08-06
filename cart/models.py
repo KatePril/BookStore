@@ -28,11 +28,13 @@ class Order(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     phone = PhoneNumberField()
-    address = models.CharField(max_length=255)
+    address = models.CharField(max_length=255, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    paid = models.BooleanField(default=False)
-    status = models.CharField(max_length=100, choices=STATUS_CHOICES)
+    paid = models.BooleanField(default=False, blank=True)
+    status = models.CharField(max_length=100, choices=STATUS_CHOICES, blank=True, default=STATUS_CHOICES[0][0])
+    email = models.CharField(max_length=255, null=True, blank=True)
+    comment = models.TextField(null=True, blank=True)
     
     class Meta:
         ordering = ('-created_at',)

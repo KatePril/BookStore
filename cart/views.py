@@ -91,9 +91,13 @@ class OrderCreateView(LoginRequiredMixin, View):
         data = request.POST.copy()
         data.update(user=user.id)
         data.update(total=cart['total'])
+        data.update(pnohe=user.phone)
+        data.update(address=user.address)
         data.update(paid=False)
+        print(dict(data))
         request.POST = data
         form = OrderCreateForm(request.POST)
+        print(form.errors)
         # print(request.POST)
         print(form.is_valid())
         if form.is_valid():
@@ -120,7 +124,7 @@ class OrderCreateView(LoginRequiredMixin, View):
     
     
     def get_breadcrumbs(self):
-        breadcrumbs = {reverse('catalog'): PAGE_NAMES['catalog'], reverse('cart'): 'Кошик'}
+        breadcrumbs = {reverse('catalog'): PAGE_NAMES['catalog'], reverse('cart'): 'Cart'}
         breadcrumbs['current'] = 'Make order'
         return breadcrumbs
 
