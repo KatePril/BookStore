@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'shop.apps.ShopConfig',
     'users.apps.UsersConfig',
-    'cart.apps.CartConfig',    
+    'cart.apps.CartConfig',
+    'comments.apps.CommentsConfig',    
 ]
 
 MIDDLEWARE = [

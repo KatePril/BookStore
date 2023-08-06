@@ -5,6 +5,9 @@ from django.urls import reverse
 from config.settings import PAGE_NAMES
 from .models import Category, Book, Image
 from main.mixins import ListViewBreadCrumbMixin, DetailViewBreadcrumbsMixin
+
+from comments.forms import CommentBook
+from comments.forms import CommentBookForm
 # Create your views here.
 
 class CatalogIndexView(ListViewBreadCrumbMixin):
@@ -29,9 +32,7 @@ class BookByCategory(ListViewBreadCrumbMixin):
     template_name = 'shop/book_list.html'
     category = None
     categories = Category.objects.all()
-    paginate_by = 6
-    
-    
+    paginate_by = 6    
     
     def get_queryset(self):
         self.category = Category.objects.get(slug=self.kwargs['slug'])
@@ -63,15 +64,7 @@ class BookByCategory(ListViewBreadCrumbMixin):
         breadcrumbs.update({'current': self.category.name})
         return breadcrumbs
 
-class BookDetailView(DetailViewBreadcrumbsMixin):
-    model = Book
-    template_name = 'shop/book_detail.html'
-    context_object_name = 'book'
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
-    
+class BookDetailView(DetailViewBreadcrumbsMixin):    
     def get_breadcrumbs(self):
         breadcrumbs = {reverse('catalog'): PAGE_NAMES['catalog']}
         category = self.object.main_category()
@@ -92,6 +85,21 @@ class BookDetailView(DetailViewBreadcrumbsMixin):
             breadcrumbs.update({reverse('category', kwargs={'slug': category.slug}): category.name})
         breadcrumbs.update({'current': self.object.name})
         return breadcrumbs
+    
+    def get(self, request, slug):
+        form = CommentBookForm()
+        book = Book.objects.filter(slug=slug).first()
+        comments = CommentBook.objects.filter(book=book)
+        return render(request, 'shop/book_detail.html', {'form': form, 'book': book, 'comments': comments})
+    
+    def post(self, request, slug):
+        book = Book.objects.filter(slug=slug).first()
+        form = CommentBookForm(request.POST, request.FILES)
+        comments = CommentBook.objects.filter(book=book)
+        if form.is_valid():
+            comment = form.save(user=request.user, book=book)
+            return redirect('book', slug=slug)
+        render(request, 'shop/book_detail.html', {'form': form, 'book': book, 'comments': comments})
 
 def user_book_list(request, pk):
     books = Book.objects.filter(owner=pk)

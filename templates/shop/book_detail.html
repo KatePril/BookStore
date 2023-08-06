@@ -74,21 +74,12 @@
             {% endif %}
         {% endfor %}
     </div>
-    <h3>Додати коментар</h3>
-    <form method="post">
-        {% csrf_token %}
-        {{form.as_p}}
-        <input class="btn btn-primary" type="submit" value="Додати коментар">
-    </form>
-
-    <h3>Коментарі</h3>
-    <hr>
-    {% for comment in article.comments.all %}
-        <p>{{comment.content}}</p>
-        <p><strong>Ім'я:</strong> {{comment.name}}</p>
-        <p><strong>Дата публикації:</strong> {{comment.created_at}}</p>
-        <hr>
-    {% empty %}
-        <p>Коментарів немає</p>
+    {% include 'shop/blocks/add_comment_form.html' %}
+    {% for comment in comments %}
+        {% include 'shop/blocks/comment.html' %}
+    {% empty %} 
+        <div class="block-content" style="padding: var(--padding-l);">
+            <p class="lead">No comments here yet</p>
+        </div>
     {% endfor %}
 {% endblock %}
