@@ -146,4 +146,43 @@
             </div>
         </div>
     </div>
+    <div class='block-content table-container' style="margin-top: var(--padding-l);">
+        <h2>Your orders</h2>
+        <table class="table-custom lead">
+            <thead>
+                <tr class="table-head">
+                    <th scope="col">Order</th>
+                    
+                    <th scope="col">Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Paid</th>
+                    <th scope="col">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for order in orders %}
+                {% if order.status == 'in_progress' or order.status == 'in_delivery' or order.status == 'waiting_for_payment' %}
+                    <tr style="color:var(--main-color-two);">
+                {% elif order.status == 'completed' %}
+                    <tr style="color:var(--main-color-one);">
+                {% elif order.status == 'canceled' %}
+                    <tr style="color: #ff4242;">
+                {% endif %}
+                    <th scope="row">{{ order.id }}</th>
+                        <td>{{ order.created_at }}</td>
+                        <td>{{ order.get_status }}</td>
+                        <td>
+                            {% if order.paid %}
+                            Yes
+                            {% else %}
+                            No
+                            {% endif %}
+                        </td>
+                        <td>{{ order.total }} $</td>
+                    </tr>
+            {% endfor %}
+                
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

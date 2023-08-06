@@ -24,7 +24,7 @@ class Order(models.Model):
     )
     
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    total = models.PositiveIntegerField(default=0)
+    total = models.DecimalField(max_digits=10, decimal_places=2)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     phone = PhoneNumberField()
@@ -40,7 +40,7 @@ class Order(models.Model):
         ordering = ('-created_at',)
     
     def __str__(self):  
-        return f'Замовлення №{self.id}'
+        return f'Order №{self.id}'
     
     def delete(self):
         for item in self.books.all():
@@ -49,7 +49,7 @@ class Order(models.Model):
         super().delete()
             
     def get_status(self):
-        return dict(self.STATUC_CHOICES)[self.status]
+        return dict(self.STATUS_CHOICES)[self.status]
 
 class OrderBook(models.Model):
     order = models.ForeignKey(Order, related_name='books', on_delete=models.CASCADE)

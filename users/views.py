@@ -4,6 +4,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
 from django.utils.text import slugify
+from cart.models import Order
 
 from .forms import SingupForm, EditProfileForm, CustomAuthenticationForm, BookForm
 from shop.models import Book
@@ -42,7 +43,8 @@ def singup_view(request):
 
 @login_required()
 def profile_view(request):
-    return render(request, 'users/profile.html', {'title':'Profile'})
+    orders = Order.objects.filter(user=request.user)
+    return render(request, 'users/profile.html', {'title':'Profile', 'orders': orders})
 
 @login_required
 def profile_edit(request):
