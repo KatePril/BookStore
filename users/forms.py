@@ -3,9 +3,8 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm
 
-from ckeditor.fields import RichTextFormField
-
 from shop.models import Book, Image
+from blog.models import Article
 
 class SingupForm(UserCreationForm):
     class Meta:
@@ -65,7 +64,7 @@ class BookForm(forms.ModelForm):
     image = forms.ImageField(required=False)
     class Meta:
         model = Book
-        fields = ('name', 'description', 'quantity', 'price', 'is_best_saled', 'category')
+        fields = ('name','description', 'quantity', 'price', 'is_best_saled', 'category')
         widgets = {
             'category': forms.SelectMultiple(attrs={'class': 'form-control'}),
             'name': forms.TextInput(attrs={'class': 'form-control'}),
@@ -73,8 +72,7 @@ class BookForm(forms.ModelForm):
             'price': forms.NumberInput(attrs={'class': 'form-control'}),
         }
 
-    def save(self,  user):
-        
+    def save(self, user):
         book = super().save(commit=False)
         book.owner = user
         book.save()
@@ -83,3 +81,21 @@ class BookForm(forms.ModelForm):
         if self.cleaned_data['image']:
             Image.objects.create(book=book, image=self.cleaned_data['image'], is_main=True)
         return book
+
+class ArticleForm(forms.ModelForm):
+    image = forms.ImageField(required=False)
+    class Meta:
+        model = Article
+        fields = ('title','related_book', 'tags', 'preview', 'text', 'status', 'is_popular')
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'tags': forms.SelectMultiple(attrs={'class': 'form-control'}),
+            'title': forms.Textarea(attrs={'class': 'form-control'}),
+        }
+    
+    def save(self, user):
+        article = super().save(commit=False)
+        article.owner = user
+        if self.cleaned_data['image']:
+            article.image = self.cleaned_data['image']
+        return article

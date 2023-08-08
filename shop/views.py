@@ -6,7 +6,7 @@ from config.settings import PAGE_NAMES
 from .models import Category, Book, Image
 from main.mixins import ListViewBreadCrumbMixin, DetailViewBreadcrumbsMixin
 
-from comments.forms import CommentBook
+from comments.models import CommentBook
 from comments.forms import CommentBookForm
 # Create your views here.
 
@@ -24,8 +24,7 @@ class CatalogIndexView(ListViewBreadCrumbMixin):
     def get_breadcrumbs(self):
         self.breadcrumbs = {
             'current' : PAGE_NAMES['catalog'],
-
-        } # вказуємо поточну сторінку ДОПИСАТИ
+        }
         return self.breadcrumbs
 
 class BookByCategory(ListViewBreadCrumbMixin):
