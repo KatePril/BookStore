@@ -16,13 +16,14 @@ class BlogIndexView(ListViewBreadCrumbMixin):
     template_name = 'blog/index.html'
     model = Article
     
+    def get_queryset(self):
+        return Article.objects.filter(is_popular=True)
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['tags'] = Tag.objects.all()
+        context['articles'] = Article.objects.filter(is_popular=True)
         return context
-    
-    def get_queryset(self):
-        return Article.objects.filter(is_popular=True)
     
     def get_breadcrumbs(self):
         self.breadcrumbs = {
@@ -51,10 +52,18 @@ class ArticleByTag(ListViewBreadCrumbMixin):
     template_name = 'blog/article_list.html'
     tag = None
     tags = Tag.objects.all()
+    model = Article
+    
+    
+    # def get_queryset(self):
+    #     queryset = super().get_queryset()
+    #     self.tag = Tag.objects.filter(slug=self.kwargs['slug'])
+    #     return queryset
     
     def get_queryset(self):
         self.tag = Tag.objects.filter(slug=self.kwargs['slug'])
-        return Article.objects.filter(tag=self.tag)
+        articles = Article.objects.filter(tags__name=self.tag).first()
+        return articles
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -1,0 +1,38 @@
+.tags-container {
+    margin-top: var(--padding-l);
+    padding: var(--padding-l);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tag-link {
+    text-decoration: none;
+    color: var(--main-color-one);
+    margin: var(--padding-s) var(--padding-m) var(--padding-s) var(--padding-m);
+}
+
+.tag-link {
+    text-decoration: none;
+    color: var(--main-color-one);
+}
+
+.tag-link:hover {
+    color: var(--main-color-two);
+}
+
+.article-card {
+    width: 30%;
+    overflow: hidden;
+}
+.article-card-text {
+    padding: var(--padding-m);
+}
+
+.book-link {
+    text-decoration: none;
+    color: var(--main-color-one);
+}
+
+.book-link:hover {
+    color: var(--main-color-two);
+}

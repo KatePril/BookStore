@@ -4,6 +4,7 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from django.contrib.auth import get_user_model
 from django.utils.text import slugify
+from django.urls import reverse
 
 from shop.models import Book
 # Create your models here.
@@ -12,8 +13,8 @@ class Article(models.Model):
     DRAFT = 'draft'
     
     STATUS_CHOICES = (
-        (ACTIVE, 'Активна'),
-        (DRAFT, 'Чернетка'),
+        (ACTIVE, 'Active'),
+        (DRAFT, 'Draft'),
     )
     
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='articles',  default=1)
@@ -38,6 +39,9 @@ class Article(models.Model):
     
     class Meta:
         ordering = ['-created_at']
+    
+    def get_absolute_url(self):
+        return reverse('article', kwargs={'slug': self.slug})
 
 
 class Tag(models.Model):
