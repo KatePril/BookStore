@@ -141,8 +141,8 @@
                 <a href="{% url 'create_product' %}" class="orange-button create-product-btn">Create new product</a>
             </div>
             <div class="block-content products-admin-block">
-                <a href="" class="green-outline-button-profile view-products-btn">View my articless</a>
-                <a href="" class="orange-button create-product-btn">Create new article</a>
+                <a href="{% url 'user_articles' request.user.id %}" class="green-outline-button-profile view-products-btn">View my articles</a>
+                <a href="{% url 'create_article' %}" class="orange-button create-product-btn">Create new article</a>
             </div>
         </div>
     </div>

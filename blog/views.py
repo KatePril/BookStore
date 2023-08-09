@@ -41,6 +41,7 @@ class AllArticlesView(ListViewBreadCrumbMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['tags'] = self.tags
+        context['articles'] = Article.objects.all()
         return context
     
     def get_breadcrumbs(self):

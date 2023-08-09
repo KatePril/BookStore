@@ -6,8 +6,9 @@ from django.contrib.auth.decorators import login_required
 from django.utils.text import slugify
 from cart.models import Order
 
-from .forms import SingupForm, EditProfileForm, CustomAuthenticationForm, BookForm
+from .forms import SingupForm, EditProfileForm, CustomAuthenticationForm, BookForm, ArticleForm
 from shop.models import Book
+from blog.models import Article
 
 # Create your views here.
 def login_view(request):
@@ -89,8 +90,23 @@ def edit_product(request, slug):
 
 @login_required()
 def create_article(request):
-    pass
+    if request.method == 'POST':
+        form = ArticleForm(request.POST, request.FILES)
+        if form.is_valid():
+            article = form.save(user=request.user)
+            return redirect('article', slug=article.slug)
+    else:
+        form = ArticleForm()
+    return render(request, 'users/create.html', {'form': form})
 
 @login_required()
-def edit_article(request):
-    pass
+def edit_article(request, slug):
+    article = get_object_or_404(Article, slug=slug, author=request.user)
+    if request.method == 'POST':
+        form = ArticleForm(request.POST, request.FILES, instance=article)
+        if form.is_valid():
+            article = form.save(user=request.user)
+            return redirect('article', slug=article.slug)
+    else:
+        form = ArticleForm(instance=article)
+    return render(request, 'users/edit.html', {'form': form})

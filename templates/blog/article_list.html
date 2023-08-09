@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block breadcrumbs %}
+    {% include 'blog/blocks/breadcrumbs.html' %}
+{% endblock %}
+{% block content%}
+{% include 'blog/blocks/tags.html' %}
+<div class="for-cards">
+    {% for article in articles %}
+        {% include 'blog/blocks/article_card.html' %}
+    {% endfor %}
+</div>
+{% endblock %}
