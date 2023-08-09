@@ -79,7 +79,7 @@ class ArticleByTag(ListViewBreadCrumbMixin):
 class ArticleDetailView(DetailViewBreadcrumbsMixin):
     def get_breadcrumbs(self):
         breadcrumbs = {reverse('blog'): PAGE_NAMES['blog']}
-        breadcrumbs.update({'current': self.object.title})
+        breadcrumbs.update({'current': self.article.title})
         return super().get_breadcrumbs()
     
     def get(self, request, slug):

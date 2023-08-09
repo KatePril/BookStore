@@ -74,11 +74,13 @@
             {% endif %}
         {% endfor %}
     </div>
-    {% include 'shop/blocks/add_comment_form.html' %}
+    {% if user.is_authenticated %}
+        {% include 'shop/blocks/add_comment_form.html' %}
+    {% endif %}
     {% for comment in comments %}
         {% include 'shop/blocks/comment.html' %}
     {% empty %} 
-        <div class="block-content" style="padding: var(--padding-l);">
+        <div class="block-content" style="padding: var(--padding-l); margin-top: var(--padding-l);">
             <p class="lead">No comments here yet</p>
         </div>
     {% endfor %}

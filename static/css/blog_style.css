@@ -36,3 +36,14 @@
 .book-link:hover {
     color: var(--main-color-two);
 }
+
+.article-info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: var(--border-w) solid var(--main-color-one);
+    border-radius: var(--border-r-s);
+    padding: var(--padding-s);
+    margin-bottom: var(--padding-s);
+    margin-top: var(--padding-m);
+}
