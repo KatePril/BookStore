@@ -91,7 +91,7 @@ class ArticleForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'tags': forms.SelectMultiple(attrs={'class': 'form-control'}),
             'related_book': forms.Select(attrs={'class': 'form-control'}),
-            'title': forms.Textarea(attrs={'class': 'form-control'}),
+            'preview': forms.Textarea(attrs={'class': 'form-control'}),
         }
     
     def save(self, user):

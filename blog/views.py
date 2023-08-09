@@ -63,7 +63,7 @@ class ArticleByTag(ListViewBreadCrumbMixin):
     
     def get_queryset(self):
         self.tag = Tag.objects.filter(slug=self.kwargs['slug'])
-        articles = Article.objects.filter(tags__name=self.tag).first()
+        articles = Article.objects.filter(tags=self.kwargs['slug'])
         return articles
     
     def get_context_data(self, **kwargs):
