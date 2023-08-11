@@ -19,5 +19,12 @@
                 Read full article
             </button>
         </a>
+        {% if article.author == request.user %}
+        <a href="{% url 'delete_article' slug=article.slug pk=request.user.id%}" style="width:100%;">
+            <button class="button-outline-card lead" style="margin-top: var(--padding-m);">
+                Delete article
+            </button>
+        </a>
+        {% endif %}
     </div>
 </div>

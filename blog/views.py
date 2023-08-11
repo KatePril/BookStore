@@ -101,3 +101,8 @@ class ArticleDetailView(DetailViewBreadcrumbsMixin):
 def user_article_list(request, pk):
         articles = Article.objects.filter(author=pk)
         return render(request, 'blog/custom_list.html', {'articles': articles})
+
+def delete_article(request, pk, slug):
+    article = get_object_or_404(Article, slug=slug)
+    article.delete()
+    return redirect('user_articles', pk=pk)
