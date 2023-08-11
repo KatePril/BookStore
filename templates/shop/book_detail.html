@@ -54,6 +54,14 @@
 
         </div>
     </div>
+    {% if related_articles %}
+    <h2 style="margin-top: var(--padding-m); color: var(--secondary-color-two);">Related articles</h2>
+    <div class="for-related-articles">
+        {% for article in related_articles %}
+        {% include 'shop/blocks/related_article.html' %}
+        {% endfor %}
+    </div>
+    {% endif %}
     {% if book.description %}
     <div class="block-content lead block-description">{{book.description|safe}}</div>
     {% endif %}

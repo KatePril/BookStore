@@ -8,6 +8,7 @@ from main.mixins import ListViewBreadCrumbMixin, DetailViewBreadcrumbsMixin
 
 from comments.models import CommentBook
 from comments.forms import CommentBookForm
+from blog.models import Article
 # Create your views here.
 
 class CatalogIndexView(ListViewBreadCrumbMixin):
@@ -88,17 +89,20 @@ class BookDetailView(DetailViewBreadcrumbsMixin):
     def get(self, request, slug):
         form = CommentBookForm()
         book = Book.objects.filter(slug=slug).first()
+        related_articles = Article.objects.filter(related_book=book)
         comments = CommentBook.objects.filter(book=book)
-        return render(request, 'shop/book_detail.html', {'form': form, 'book': book, 'comments': comments})
+        return render(request, 'shop/book_detail.html', {'form': form, 'book': book, 'comments': comments, 'related_articles': related_articles})
     
     def post(self, request, slug):
         book = Book.objects.filter(slug=slug).first()
+        related_articles = Article.objects.filter(related_book=book)
+        print(related_articles)
         form = CommentBookForm(request.POST, request.FILES)
         comments = CommentBook.objects.filter(book=book)
         if form.is_valid():
             comment = form.save(user=request.user, book=book)
             return redirect('book', slug=slug)
-        render(request, 'shop/book_detail.html', {'form': form, 'book': book, 'comments': comments})
+        render(request, 'shop/book_detail.html', {'form': form, 'book': book, 'comments': comments, 'related_articles': related_articles})
 
 def user_book_list(request, pk):
     books = Book.objects.filter(owner=pk)
