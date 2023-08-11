@@ -94,6 +94,7 @@ def create_article(request):
         form = ArticleForm(request.POST, request.FILES)
         if form.is_valid():
             article = form.save(user=request.user)
+            article.save()
             return redirect('article', slug=article.slug)
     else:
         form = ArticleForm()
@@ -103,10 +104,14 @@ def create_article(request):
 def edit_article(request, slug):
     article = get_object_or_404(Article, slug=slug, author=request.user)
     if request.method == 'POST':
+        print(request.POST)
         form = ArticleForm(request.POST, request.FILES, instance=article)
         if form.is_valid():
             article = form.save(user=request.user)
+            article.save()
             return redirect('article', slug=article.slug)
+        else:
+            print(form.errors)
     else:
         form = ArticleForm(instance=article)
     return render(request, 'users/edit.html', {'form': form})

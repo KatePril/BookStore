@@ -47,3 +47,21 @@
     margin-bottom: var(--padding-s);
     margin-top: var(--padding-m);
 }
+
+.all-articles-button {
+    width: 100%;
+    border: var(--border-w) solid var(--main-color-two);
+    border-radius: var(--border-r-s);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--padding-m);
+    color: var(--main-color-two);
+    text-decoration: none;
+    margin-top: var(--padding-l);
+}
+
+.all-articles-button:hover {
+    color: var(--main-color-one);
+    background-color: var(--main-color-two);
+}

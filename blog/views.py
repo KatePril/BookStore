@@ -63,18 +63,18 @@ class ArticleByTag(ListViewBreadCrumbMixin):
     
     def get_queryset(self):
         self.tag = Tag.objects.filter(slug=self.kwargs['slug'])
-        articles = Article.objects.filter(tags=self.kwargs['slug'])
+        articles = Article.objects.filter(tags__slug=self.kwargs['slug'])
         return articles
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['tag'] = self.tag
         context['tags'] = self.tags
+        context['articles'] = Article.objects.filter(tags__slug=self.kwargs['slug'])
         return context
     
     def get_breadcrumbs(self):
         breadcrumbs = {reverse('blog'): PAGE_NAMES['blog']}
-        breadcrumbs.update({'current': self.tag.name})
+        # breadcrumbs.update({'current': self.tag.name})
         return breadcrumbs
 
 class ArticleDetailView(DetailViewBreadcrumbsMixin):

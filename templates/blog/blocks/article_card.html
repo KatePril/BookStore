@@ -1,7 +1,7 @@
 {% load static %}
-<div class="block-content article-card card">
+<div class="block-content article-card card card-3">
     <div class="for-card-image">
-        {% if article.image.url %}
+        {% if article.image %}
             <img class="card-image" src="{{article.image.url}}">
         {% else %}
             <img src="{% static 'img/tmb.png' %}" alt="{{ book.name }}" style="width:100%;">

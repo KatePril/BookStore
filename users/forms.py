@@ -96,7 +96,10 @@ class ArticleForm(forms.ModelForm):
     
     def save(self, user):
         article = super().save(commit=False)
-        article.owner = user
+        article.author = user
+        
         if self.cleaned_data['image']:
             article.image = self.cleaned_data['image']
+        
+        
         return article
