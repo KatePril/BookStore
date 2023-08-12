@@ -129,11 +129,6 @@ def user_book_list(request, pk):
     books = Book.objects.filter(owner=pk)
     return render(request, 'shop/custom_list.html', {'books': books})
 
-def search(request):
-    query = request.GET.get('query', '')
-    books = Book.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
-    return render(request, 'shop/custom_list.html', {'books': books})
-
 def delete_image(request, pk, slug):
     image = get_object_or_404(Image, pk=pk, book__owner=request.user)
     image.delete()

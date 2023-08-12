@@ -12,14 +12,6 @@
     </div>
     
     <div class="inside-nav">
-        <div>
-            <form class="search-form" role="search">
-                <input class="search-input input-color" type="search" placeholder="Search" aria-label="Search" method="get" action="{% url 'search' %}">
-                <button class="search-button green-outline-button" type="submit">
-                    <i class="fa-solid fa-magnifying-glass seach-icon"></i>
-                </button>
-            </form>
-        </div>
         <div class="account-buttons">
             {% if user.is_authenticated %}
                 <a href="{% url 'cart' %}" class="green-outline-button account-button cart-button">
