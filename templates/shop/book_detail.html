@@ -77,12 +77,14 @@
             {% if image.image.url != book.main_image.image.url %}
                 <div class="for-image-detail">
                     {% if request.user.id == book.owner.id or request.user.is_admin %}
+                    <a href="{{ image.image.url }}" class="product-image" data-lightbox="roadtrip">
                     <img class="image-detail" src="{{image.image.url}}" alt="">
                     <div class="for-image-buttons">
                         <a href="{% url 'delete_image' slug=book.slug pk=image.id %}" class="button-image orange-outline-button orange-outline-button-image-detail lead">Delete</a>
                         <a href="{% url 'set_main_image' slug=book.slug pk=image.id %}" class="button-image orange-button-image orange-button-image-detail lead">Main</a>
                     </div>
                     {% else %}
+                    <a href="{{ image.image.url }}" class="product-image" data-lightbox="roadtrip">
                     <img class="image-detail-not-owner" src="{{image.image.url}}" alt="">
                     {% endif %}     
                 </div>
