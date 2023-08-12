@@ -28,3 +28,7 @@ class UserProfile(AbstractUser):
     instagram = models.CharField(max_length=255, blank=True, null=True)
     facebook = models.CharField(max_length=255, blank=True, null=True)
     is_admin = models.BooleanField(default=False)
+    
+    def make_admin(self):
+        self.is_admin = True
+        self.save()

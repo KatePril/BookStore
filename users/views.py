@@ -10,6 +10,9 @@ from .forms import *
 from shop.models import Book
 from blog.models import Article
 
+from main.mixins import ListViewBreadCrumbMixin
+from .models import UserProfile
+
 # Create your views here.
 def login_view(request):
     if request.method == 'POST':
@@ -139,3 +142,31 @@ def create_tag(request):
     else:
         form = TagForm()
     return render(request, 'users/create.html', {'form': form})
+
+class AllUsersView(ListViewBreadCrumbMixin):
+    template_name ='users/all_users.html'
+    users = UserProfile.objects.all()
+    print(users)
+    
+    def get_queryset(self):
+        return UserProfile.objects.all()
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        context['users'] = UserProfile.objects.all()
+        return context
+
+def view_all_users(request):
+    users = UserProfile.objects.all()
+    return render(request, 'users/all_users.html', {'users': users})
+
+def delete_user(request, pk):
+    user = get_object_or_404(UserProfile, pk=pk)
+    user.delete()
+    return redirect('all_users')
+
+def make_admin(request, pk):
+    user = get_object_or_404(UserProfile, pk=pk)
+    user.make_admin()
+    return redirect('all_users')

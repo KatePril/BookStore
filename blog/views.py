@@ -118,3 +118,8 @@ def delete_article(request, pk, slug):
     article = get_object_or_404(Article, slug=slug)
     article.delete()
     return redirect('user_articles', pk=pk)
+
+def delete_tag(request, pk):
+    tag = get_object_or_404(Tag, pk=pk)
+    tag.delete()
+    return redirect('all_tags')

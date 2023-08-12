@@ -33,6 +33,13 @@
                     </button>
                 </a>
             </div>
+            <div class="for-card-button">
+                <a href="{% url 'delete_book' book.id  %}" style="width:100%;">
+                    <button class="button-outline-card lead">
+                        Delete
+                    </button>
+                </a>
+            </div>
             {% endif %}
             {% if book.quantity %}
                 {% if request.user.id != book.owner.id%}

@@ -143,3 +143,13 @@ def set_main_image(request, pk, slug):
     image = get_object_or_404(Image, pk=pk, book__owner=request.user)
     image.set_main()
     return redirect('book', slug=slug)
+
+def delete_category(request, pk):
+    category = get_object_or_404(Category, pk=pk)
+    category.delete()
+    return redirect('all_categories')
+
+def delete_book(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+    book.delete()
+    return redirect('catalog')
