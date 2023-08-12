@@ -3,8 +3,8 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm
 
-from shop.models import Book, Image
-from blog.models import Article
+from shop.models import Book, Image, Category
+from blog.models import Article, Tag
 
 class SingupForm(UserCreationForm):
     class Meta:
@@ -103,3 +103,30 @@ class ArticleForm(forms.ModelForm):
         
         
         return article
+
+class CategoryForm(forms.ModelForm):
+    image = forms.ImageField(required=False)
+    class Meta:
+        model = Category
+        fields = ('name', 'description', 'parent')
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control'}),
+            'parent': forms.Select(attrs={'class': 'form-control'}),
+        }
+    
+    def save(self):
+        category = super().save(commit=False)
+        
+        if self.cleaned_data['image']:
+            category.image = self.cleaned_data['image']
+        
+        return category
+
+class TagForm(forms.ModelForm):
+    class Meta:
+        model = Tag
+        fields = ('name',)
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+        }

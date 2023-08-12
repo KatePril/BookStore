@@ -27,7 +27,28 @@ class CatalogIndexView(ListViewBreadCrumbMixin):
             'current' : PAGE_NAMES['catalog'],
         }
         return self.breadcrumbs
-
+    
+class AllBooksView(ListViewBreadCrumbMixin):
+    template_name ='shop/all_books.html'
+    
+    def get_queryset(self):
+        return Book.objects.all()
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['books'] = Book.objects.all()
+        return context
+    
+class AllCategoriesView(ListViewBreadCrumbMixin):
+    template_name ='shop/all_categories.html'
+    
+    def get_queryset(self):
+        return Category.objects.all()
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
 class BookByCategory(ListViewBreadCrumbMixin):
     template_name = 'shop/book_list.html'
     category = None

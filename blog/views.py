@@ -49,6 +49,18 @@ class AllArticlesView(ListViewBreadCrumbMixin):
         breadcrumbs.update({'current': 'All articles'})
         return breadcrumbs
 
+class AllTagsView(ListViewBreadCrumbMixin):
+    template_name ='blog/all_tags.html'
+    
+    def get_queryset(self):
+        return Tag.objects.all()
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tags'] = Tag.objects.all()
+        return context
+    
+
 class ArticleByTag(ListViewBreadCrumbMixin):
     template_name = 'blog/article_list.html'
     tag = None

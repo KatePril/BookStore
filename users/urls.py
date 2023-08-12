@@ -11,5 +11,7 @@ urlpatterns = [
     path('create_product/', create_product, name='create_product'),
     path('<str:slug>/edit_product/', edit_product, name='edit_product'),
     path('create_article/', create_article, name='create_article'),
-    path('<str:slug>/edit_article/', edit_article, name='edit_article')
+    path('<str:slug>/edit_article/', edit_article, name='edit_article'),
+    path('create_category/', create_category, name='create_category'),
+    path('create_tag/', create_tag, name='create_tag'),
 ]

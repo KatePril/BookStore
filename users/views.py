@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.text import slugify
 from cart.models import Order
 
-from .forms import SingupForm, EditProfileForm, CustomAuthenticationForm, BookForm, ArticleForm
+from .forms import *
 from shop.models import Book
 from blog.models import Article
 
@@ -115,3 +115,27 @@ def edit_article(request, slug):
     else:
         form = ArticleForm(instance=article)
     return render(request, 'users/edit.html', {'form': form})
+
+@login_required()
+def create_category(request):
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, request.FILES)
+        if form.is_valid():
+            category = form.save()
+            category.save()
+            return redirect('profile')
+    else:
+        form = CategoryForm()
+    return render(request, 'users/create.html', {'form': form})
+
+@login_required()
+def create_tag(request):
+    if request.method == 'POST':
+        form = TagForm(request.POST, request.FILES)
+        if form.is_valid():
+            tag = form.save()
+            tag.save()
+            return redirect('profile')
+    else:
+        form = TagForm()
+    return render(request, 'users/create.html', {'form': form})

@@ -55,19 +55,17 @@ class Category(MPTTModel, MetaTagMixin):
         if self.image:
             return mark_safe(f'<img src="{self.image.url}" height="70">')
     
-    # image_tag_thumbnail.short_description = 'Image'
-    # image_tag_thumbnail.allow_tags = True
-    
     def image_tag(self):
         if self.image:
             return mark_safe(f'<img src="{self.image.url}">')
     
-    # image_tag.short_description = 'Image'
-    # image_tag.allow_tags = True
-    
     class Meta:
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
+        
+    def save(self, *args, **kwargs):
+        self.slug = slugify(f'{self.name}_{uuid.uuid4()}')
+        super().save(*args, **kwargs)
 
 class Book(MetaTagMixin):
     name = models.CharField(max_length=255)

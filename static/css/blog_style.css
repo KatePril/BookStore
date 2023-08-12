@@ -65,3 +65,43 @@
     color: var(--main-color-one);
     background-color: var(--main-color-two);
 }
+
+.tag-delete-btn {
+    border: var(--border-w) solid var(--main-color-two);
+    border-radius: 0 var(--border-r-s) var(--border-r-s) 0;
+    background-color: var(--main-color-one);
+    align-items: center;
+    padding: var(--padding-s);
+    color: var(--main-color-two);
+    text-decoration: none;
+}
+
+.tag-delete-btn:hover {
+    color: var(--main-color-one);
+    background-color: var(--main-color-two);
+}
+
+.tag-text {
+    width: 50%;
+    border: var(--border-w) solid var(--main-color-two);
+    border-radius: var(--border-r-s) 0 0 var(--border-r-s);
+    background-color: var(--main-color-two);
+    padding: var(--padding-s);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tag-card-link {
+    text-decoration: none;
+    color: var(--main-color-one);
+}
+
+.tag-card-link:hover {
+    color: var(--secondary-color-two);
+}
+
+.tag-card {
+    display: flex;
+    flex-direction: row;
+}

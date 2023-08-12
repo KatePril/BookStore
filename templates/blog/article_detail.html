@@ -18,7 +18,7 @@
                 {{article.created_at}}
             </p>
         </div>
-        {% if request.user.id == article.author.id %}
+        {% if request.user.id == article.author.id or request.user.is_admin %}
             <div class="for-card-button">
                 <a href="{% url 'edit_article' article.slug %}" style="width:100%;">
                     <button class="button-outline-card lead">

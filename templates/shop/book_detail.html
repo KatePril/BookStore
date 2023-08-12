@@ -25,7 +25,7 @@
                 <div class="info-item lead">Quantity: {{book.quantity}}</div>
                 <div class="info-item lead">Price: {{book.price}}</div>
             </div>
-            {% if request.user.id == book.owner.id %}
+            {% if request.user.id == book.owner.id or request.user.is_admin %}
             <div class="for-card-button">
                 <a href="{% url 'edit_product' book.slug %}" style="width:100%;">
                     <button class="button-outline-card lead">
@@ -69,7 +69,7 @@
         {% for image in book.images.all %}
             {% if image.image.url != book.main_image.image.url %}
                 <div class="for-image-detail">
-                    {% if request.user.id == book.owner.id %}
+                    {% if request.user.id == book.owner.id or request.user.is_admin %}
                     <img class="image-detail" src="{{image.image.url}}" alt="">
                     <div class="for-image-buttons">
                         <a href="{% url 'delete_image' slug=book.slug pk=image.id %}" class="button-image orange-outline-button orange-outline-button-image-detail lead">Delete</a>
